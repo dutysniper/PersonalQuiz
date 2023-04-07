@@ -20,15 +20,17 @@ final class ResultViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
     }
+    
     //MARK: Private methods
     private func showResult(answers: [Answer]) -> Animal? {
-        let resultAnimal = Dictionary(grouping: answers, by: { $0.animal })
+        let finalAnimal = Dictionary(grouping: answers, by: { $0.animal })
                 .sorted(by: { $0.value.count > $1.value.count }).first?.key
-        return resultAnimal
+        return finalAnimal
     }
     
     private func updateUI() {
         self.navigationItem.setHidesBackButton(true, animated: true)
+        
         emojiLabel.text = "Вы - " + String(showResult(answers: answers)?.rawValue ?? " ")
         descriptionLabel.text = String(showResult(answers: answers)?.definition ?? "")
     }
